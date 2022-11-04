@@ -33,7 +33,7 @@ jobs:
           pyinstaller  -F run_server.py
 
 
-      - run: cp *.json > dist/
+      - run: cp *.json  dist/
       - uses: actions/upload-artifact@v2
         with:
           name: name-of-artifact
