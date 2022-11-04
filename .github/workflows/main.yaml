@@ -7,19 +7,33 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v2
-
-      - name: Package Application
-        uses: JackMcKew/pyinstaller-action-windows@main
+      - uses: actions/checkout@master
+      - name: Set up Python 3.6
+        uses: actions/setup-python@v1
         with:
-          path: .
+          python-version: 3.6
+
+
+      - name: Install0
+        run: >-
+          python -m
+          pip install
+          build pyinstaller
+          --user
+      - name: Install1
+        run: >-
+          pip install -r requirements.txt --user
+      - name Install2
+        run: >-
+           pyinstaller  -F run_client.py
+      - name Install3
+        run: >-
+          pyinstaller  -F run_server.py
+
 
       - run: cp *.json > dist/
-
       - uses: actions/upload-artifact@v2
         with:
           name: name-of-artifact
