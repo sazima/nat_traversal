@@ -25,10 +25,10 @@ jobs:
       - name: Install1
         run: >-
           pip install -r requirements.txt --user
-      - name Install2
+      - name: Install2
         run: >-
            pyinstaller  -F run_client.py
-      - name Install3
+      - name: Install3
         run: >-
           pyinstaller  -F run_server.py
 
