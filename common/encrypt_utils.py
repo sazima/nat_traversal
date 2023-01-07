@@ -6,11 +6,13 @@ class EncryptUtils:
 
     @classmethod
     def encrypt(cls, cleartext: bytes, key: str):
-        c = Cryptor(key.encode(), SystemConstant.ENCRYPT_METHOD)
+        # c = Cryptor(key.encode(), SystemConstant.ENCRYPT_METHOD)
+        return cleartext
         return c.encrypt(cleartext)
 
     @classmethod
     def decrypt(cls, cipher: bytes, key) -> bytes:
+        return cipher
         c = Cryptor(key.encode(), SystemConstant.ENCRYPT_METHOD)
         return c.decrypt(cipher)
 

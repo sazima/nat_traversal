@@ -30,7 +30,7 @@ class NatSerialization:
             # len: ip_port: char 长度1
             # len: bytess: uint32 长度4
             # b = type_.encode() + struct.pack(f'BBI32s{len(name.encode())}s{len(ip_port)}s{len(bytes_)}s', len(name.encode()), len(ip_port), len(bytes_),  uid.encode(), name.encode(),  ip_port.encode(), bytes_)
-            b_data = struct.pack(f'BBI32s{len(name.encode())}s{len(ip_port)}s{len(bytes_)}s', len(name.encode()), len(ip_port), len(bytes_),  uid.encode(), name.encode(),  ip_port.encode(), bytes_)
+            b_data = struct.pack(f'BBI8s{len(name.encode())}s{len(ip_port)}s{len(bytes_)}s', len(name.encode()), len(ip_port), len(bytes_),  uid.encode(), name.encode(),  ip_port.encode(), bytes_)
 
         elif type_ == MessageTypeConstant.PUSH_CONFIG:
             # b = type_.encode() + json.dumps(data).encode()
@@ -54,7 +54,7 @@ class NatSerialization:
         if type_.decode() in (MessageTypeConstant.WEBSOCKET_OVER_TCP, MessageTypeConstant.REQUEST_TO_CONNECT):
             # I是uint32, 占4个字节, unsigned __int32	0 到 4,294,967,295;  uid是固定32
             len_name, len_ip_port, len_bytes = struct.unpack('BBI', byte_data[5:13])
-            uid, name, ip_port,  socket_dta = struct.unpack(f'32s{len_name}s{len_ip_port}s{len_bytes}s', byte_data[13:])
+            uid, name, ip_port,  socket_dta = struct.unpack(f'8s{len_name}s{len_ip_port}s{len_bytes}s', byte_data[13:])
             data: TcpOverWebsocketMessage = {
                 'uid': uid.decode(),
                 'name': name.decode(),

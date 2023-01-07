@@ -155,7 +155,7 @@ class TcpForwardClient:
             return
         LoggerFactory.get_logger().info(f'get connect : {address}')
         # 当前 服务端的client 也会对应服务端连接内网服务的一个 client
-        uid = uuid.uuid4().hex
+        uid = str(uuid.uuid4())[:8]
         handler = self.listen_socket_server_to_handler[s]
 
         self.listen_socket_server_to_uid_set[s].add(uid)
